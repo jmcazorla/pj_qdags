@@ -1,0 +1,5 @@
+{a}, {a,b}
+Execution plan:
+{a}: projection({a,b},{a}), projection({a,c},{a})
+{a,b}: prejoin {a}, table {a,b}, projection({b,c},{b})
+{a,b,c}: prejoin {a,b}, table {b,c}, table {a,c}

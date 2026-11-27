@@ -1,0 +1,31 @@
+# Ejemplo runnable de PLAN_FILE/PLAN_ID para run_plan_stats.sh /
+# run_plan_resumable_stats.sh / run_plan_race_stats.sh -- generar el dataset
+# de juguete primero:
+#
+#   ./build/examples/generate_demo_dataset /tmp/demo
+#   cp scripts/confs/plan_triangle_demo.conf.example scripts/confs/plan_triangle_demo.conf
+#   ./scripts/run_plan_stats.sh scripts/confs/plan_triangle_demo.conf
+#
+# queries/tr1_example.txt trae UNA query triangulo (Tr1, predicados 1,2,3 --
+# los mismos que genera generate_demo_dataset) y
+# scripts/confs/plans/example_triangle.plan.txt el plan que la resuelve
+# (mismo DSL que tests/validate_strategies_plan.cpp). Cardinalidad esperada
+# contra el dataset de /tmp/demo: 6.
+
+DATASET="/tmp/demo/relations"
+QUERIES="$REPO_ROOT/queries/tr1_example.txt"
+PLAN_FILE="$REPO_ROOT/scripts/confs/plans/example_triangle.plan.txt"
+PLAN_ID="{a}, {a,b}"
+OUT="/tmp/plan_triangle_demo_out"
+UPPER_BOUND=0                    # 0 = sin limite (default)
+REPS=1                          # repeticiones por nivel/consulta (default: 1)
+GRID_SIDE=52000000               # lado de la grilla (default del script)
+VARIANT="bv64"                   # backend del dataset de demo (generate_demo_dataset)
+K=2                              # aridad de la query
+MXM=false                        # true = motor de multiplicacion de matrices
+MODE="both"                      # generic|adaptive|both
+PARALLEL_PHASES="last_only"      # first_only|last_only|all
+TIME_OUT=0                       # timeout por query, 0 = sin limite
+TIMEOUT=0                        # timeout por corrida completa, 0 = sin limite
+
+PARALLEL_LEVELS="0 2"

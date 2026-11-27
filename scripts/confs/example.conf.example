@@ -1,0 +1,75 @@
+# Plantilla de .conf para los scripts scripts/run_*_stats.sh -- copiar a un
+# archivo nuevo (p.ej. scripts/confs/mi_corrida.conf) y editar. Cada script
+# lee SOLO las variables de su propia lista (ver su banner); las que no use
+# se ignoran. Todas las variables de abajo tienen default en el script, asi
+# que las comentadas pueden quedar comentadas.
+#
+# Que script usa que variables (resumen; detalle en el banner de cada .sh):
+#   run_one_shot_stats / run_wk_stats / run_orig_stats / run_mxm_stats /
+#   run_one_shot_race_stats / run_wk_race_stats / run_leapfrog_stats
+#                         MODE, INIT_COEF/GROWTH/MAX_RETRIES y PARALLEL_PHASES
+#                         segun el motor (orig no tiene ninguno; mxm usa
+#                         MODE=basic|wp|both; One-Shot (run_one_shot_stats y
+#                         run_one_shot_race_stats) solo usa PARALLEL_PHASES: no tiene
+#                         adaptive ni resumable y los demas se ignoran con un aviso)
+#   run_wk_resumable_stats
+#                         INIT_COEF/GROWTH/MAX_RETRIES, sin MODE ni
+#                         PARALLEL_PHASES (motor unico, fases secuenciales)
+#   run_plan_stats / run_plan_race_stats / run_plan_resumable_stats
+#                         PLAN_FILE+PLAN_ID o PLAN_GROUP (exactamente uno),
+#                         MXM, K; race/plan_stats ademas MODE/PARALLEL_PHASES
+#   run_wk_stats / run_leapfrog_stats / run_wk_race_stats
+#                         COEF_BOUND, VARIANT_OUT (run_wk_stats, run_leapfrog)
+#   run_leapfrog_stats    LF_ORDER, LF_DEPTH
+#   run_wk_resumable_stats / run_wk_race_stats VARIANT_OUT
+#
+# Dataset y queries
+DATASET="/ruta/al/dataset/construido/con/ese/backend"   # obligatoria
+QUERIES="/ruta/al/archivo/de/queries.txt"               # obligatoria
+OUT="/ruta/de/salida"                                   # obligatoria
+# BIN="/ruta/al/build"                 # default: <repo>/build
+# VARIANT="bv64"                       # bv64|v5|v|sd|rrr|rrr15 -- default: bv64 (debe coincidir con DATASET)
+# VARIANT_OUT="sd"                     # backend de salida del resultado final -- default: igual a VARIANT
+# GRID_SIDE=52000000                   # lado de la grilla: 52000000 para el dataset filtrado, 296008193 para el completo -- default: 52000000
+
+# Corrida
+UPPER_BOUND=0                          # cota de resultados por query, 0 = sin limite -- default: 0
+REPS=1                                 # repeticiones por nivel de paralelismo -- default: 1
+PARALLEL_LEVELS="0 2 4 6"              # niveles de corte, separados por espacio; el primero es la base del speedup -- default: "0 2 4"
+# MODE=both                            # generic|adaptive|both (basic|wp|both en run_mxm_stats) -- default: both
+# PARALLEL_PHASES=last_only            # first_only|last_only|all -- default: last_only
+
+# Motor adaptativo (no aplica a run_orig/run_mxm)
+# INIT_COEF=2                          # cota de coeficiente inicial -- default: 2
+# GROWTH=2                             # factor de crecimiento del coeficiente -- default: 2
+# GROWTH_MODE=fixed                     # fixed | proportional (c * clamp(L/r*1.5, GROWTH, 64)) -- default: fixed
+# MAX_RETRIES=15                       # reintentos maximos de adaptive, 0 = sin tope -- default: 15
+# COEF_BOUND=0                         # cota de coeficiente de generic, 0 = sin cota -- default: 0 (solo WK/leapfrog/plan)
+
+# Plan (solo run_plan_*_stats): exactamente UNA de estas dos formas
+# PLAN_FILE="/ruta/al/plan.txt"        # plan fijo (con PLAN_ID)
+# PLAN_ID="{a}, {a,b}"                 #   bloque dentro de PLAN_FILE
+# PLAN_GROUP="normal"                  # plan automatico por topologia: normal|best|wk_k|leapfrog
+# MXM=false                            # true = usa multiplicacion de matrices -- default: false
+# K=2                                  # aridad de la query -- default: 2
+
+# Leapfrog (solo run_leapfrog_stats)
+# LF_ORDER=proj_size                   # proj_size|degree -- default: proj_size
+# LF_DEPTH=full                        # full|non_lonely -- default: full
+
+# Limites de recursos
+# TIME_OUT=0                           # timeout POR QUERY en segundos, 0 = sin limite -- default: 0
+# MEMLIMIT_KB=0                        # ulimit -v por corrida, 0 = sin tope -- default: 0
+# TIMEOUT=0                            # timeout de la corrida COMPLETA en segundos, 0 = sin tope -- default: 0
+
+# Camino de DISPERSION de qdag. Para bases
+# de d atributos dentro de joins de 7 a 10 atributos: scatter evita las tablas de 16 bits
+# y calcula el rango solo de los hijos que sobreviven.
+# No lo soportan los motores resumables (wk_resumable, plan_resumable).
+# WIDE_BASE=tables                       # tables (default) | scatter
+# WIDE_MIN_D=4                           # con scatter: d minimo para usar dispersion -- default: 4
+# WIDE_MIN_DIM=7                         # con scatter: dim minimo (de 7 a 10) -- default: 7
+# Con WIDE_BASE=scatter la carpeta OUT se renombra a <OUT>_scatter_d<min_d>_dim<min_dim> (no pisa
+# los resultados de la misma configuracion con tablas). Con tables, OUT queda como esta.
+# El run.conf de la salida anota la configuracion efectiva (WIDE_*), tambien si vino del entorno.
+#                                      # (subirlo si la corrida completa tarda mas; mata el proceso entero)

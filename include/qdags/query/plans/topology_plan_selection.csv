@@ -1,0 +1,69 @@
+topology;group;plan_id
+T2;normal;{b}, {a,b}, {b,c}
+P2;normal;{b}, {a,b}, {b,c}
+Ti2;normal;{b}, {a,b}, {b,c}
+P3;normal;{b}, {c}, {b,c}
+P4;normal;{b}, {b,c}, {b,c,d}
+T3;normal;{a}, {a,b}, {a,c}, {a,d}
+Ti3;normal;{a}, {a,b}, {a,c}, {a,d}
+J3;normal;{a}, {a,b}, {a,c}, {a,d}
+T4;normal;{a}, {a,b}, {a,c}, {a,d}, {a,e}
+Ti4;normal;{a}, {a,b}, {a,c}, {a,d}, {a,e}
+J4;normal;{a}, {a,b}, {a,c}, {a,d}, {a,e}
+S1;normal;{a}, {a,b}, {a,b,c}
+S2;normal;{a}, {a,b}, {a,b,c}
+S3;normal;{a}, {a,b}, {a,b,c}
+S4;normal;{a}, {a,b}, {a,b,c}
+Tr1;normal;{a}, {a,b}
+Tr2;normal;{a}, {a,b}
+T2;best;{b}, {a,b}, {b,c}
+P2;best;{b}, {a,b}, {b,c}
+Ti2;best;{b}, {a,b}, {b,c}
+P3;best;{b,c}
+P4;best;{b}, {c,d}, {b,c,d}
+T3;best;{a}, {a,b}, {a,c}, {a,d}
+Ti3;best;{a}, {a,b}, {a,c}, {a,d}
+J3;best;{a}, {a,b}, {a,c}, {a,d}
+T4;best;{a}, {a,b}, {a,c}, {a,d}, {a,e}, {a,b,e}, {a,d,c}
+Ti4;best;{a}, {a,b}, {a,c}, {a,d}, {a,e}
+J4;best;{a}, {a,b}, {a,c}, {a,d}, {a,e}
+S1;best;{a}, {a,b}, {a,d}
+S2;best;{a,b}, {a,b,c}
+S3;best;{a}, {a,b}, {a,b,c}
+S4;best;{a,b}, {a,b,c}
+Tr1;best;{a}, {a,b}
+Tr2;best;{a}, {a,b}
+T2;wk_k;{b}, {a,b}, {b,c}
+P2;wk_k;{b}, {a,b}, {b,c}
+Ti2;wk_k;{b}, {a,b}, {b,c}
+P3;wk_k;{b}, {c}, {b,c}
+P4;wk_k;{b}, {c}, {d}, {b,c}, {c,d}
+T3;wk_k;{a}, {a,b}, {a,c}, {a,d}
+Ti3;wk_k;{a}, {a,b}, {a,c}, {a,d}
+J3;wk_k;{a}, {a,b}, {a,c}, {a,d}
+T4;wk_k;{a}, {a,b}, {a,c}, {a,d}, {a,e}
+Ti4;wk_k;{a}, {a,b}, {a,c}, {a,d}, {a,e}
+J4;wk_k;{a}, {a,b}, {a,c}, {a,d}, {a,e}
+S1;wk_k;{a}, {b}, {c}, {d}, {a,b}, {b,c}, {c,d}, {a,d}
+S2;wk_k;{a}, {b}, {c}, {d}, {a,b}, {b,c}, {c,d}, {a,d}
+S3;wk_k;{a}, {b}, {c}, {d}, {a,b}, {b,c}, {c,d}, {a,d}
+S4;wk_k;{a}, {b}, {c}, {d}, {a,b}, {b,c}, {c,d}, {a,d}
+Tr1;wk_k;{a}, {b}, {c}, {a,b}, {a,c}, {b,c}
+Tr2;wk_k;{a}, {b}, {c}, {a,b}, {a,c}, {b,c}
+T2;leapfrog;{b}, {a,b}
+P2;leapfrog;{b}, {a,b}
+Ti2;leapfrog;{b}, {a,b}
+P3;leapfrog;{b}, {b,c}
+P4;leapfrog;{b}, {b,c}, {b,c,d}
+T3;leapfrog;{a}, {a,b}, {a,b,c}
+Ti3;leapfrog;{a}, {a,b}, {a,b,c}
+J3;leapfrog;{a}, {a,b}, {a,b,c}
+T4;leapfrog;{a}, {a,b}, {a,b,d}
+Ti4;leapfrog;{a}, {a,b}, {a,b,d}
+J4;leapfrog;{a}, {a,b}, {a,b,d}
+S1;leapfrog;{a}, {a,b}, {a,b,c}
+S2;leapfrog;{a}, {a,b}, {a,b,c}
+S3;leapfrog;{a}, {a,b}, {a,b,c}
+S4;leapfrog;{a}, {a,b}, {a,b,c}
+Tr1;leapfrog;{a}, {a,b}
+Tr2;leapfrog;{a}, {a,b}

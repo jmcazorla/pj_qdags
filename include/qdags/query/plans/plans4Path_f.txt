@@ -1,0 +1,22 @@
+{b}, {b,c}, {b,c,d}
+Execution plan:
+{b}: projection({a,b},{b}), projection({b,c},{b}), 
+{b,c}: prejoin {b}, table {b,c}, projection({c,d},{c}), 
+{b,c,d}: prejoin {b,c}, table {c,d}, projection({d,e},{d}), 
+{a,b,c,d,e}: prejoin {b,c,d}, table {a,b}, table {d,e}, 
+
+{b}, {c,d}, {b,c,d}
+Execution plan:
+{b}: projection({a,b},{b}), projection({b,c},{b}), 
+{c,d}: projection({b,c},{c}), table {c,d}, projection({d,e},{d}), 
+{b,c,d}: prejoin {b}, prejoin {c,d}, table {b,c}, 
+{a,b,c,d,e}: prejoin {b,c,d}, table {a,b}, table {d,e}, 
+
+{b}, {c}, {d}, {b,c}, {c,d}
+Execution plan:
+{b}: projection({a,b},{b}), projection({b,c},{b}), 
+{c}: projection({b,c},{c}), projection({c,d},{c}), 
+{d}: projection({c,d},{d}), projection({d,e},{d}), 
+{b,c}: prejoin {b}, prejoin {c}, table {b,c}, 
+{c,d}: prejoin {c}, prejoin {d}, table {c,d}, 
+{a,b,c,d,e}: prejoin {b,c}, prejoin {c,d}, table {a,b}, table {d,e}, 
